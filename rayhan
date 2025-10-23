@@ -1,0 +1,138 @@
+# Project: rayhan-profile-site
+
+=== README.md ===
+# Rayhan Profile - GitHub Pages Site
+
+Situs statis sederhana untuk menampilkan profil dan biodata Rayhan. Siap diunggah ke repository GitHub dan dipublikasikan lewat GitHub Pages.
+
+**Isi proyek**
+- `index.html` — Halaman utama (profil + biodata)
+- `styles.css` — Styling
+- `script.js` — Interaksi kecil (menu toggle, tema gelap/terang)
+- `assets/profile.jpg` — Foto profil placeholder (ganti dengan foto Rayhan)
+
+**Cara menggunakan**
+1. Buat repository baru di GitHub (misal `rayhan-profile-site`).
+2. Salin semua file ke repo tersebut dan commit.
+3. Di GitHub: Settings -> Pages -> pilih branch `main` (atau `gh-pages`) dan folder `/root` -> Save.
+4. Tunggu beberapa menit. Situs akan tersedia di `https://<username>.github.io/<repo>` atau `https://<username>.github.io` jika repo bernama `<username>.github.io`.
+
+---
+
+=== index.html ===
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Rayhan — Profil & Biodata</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="brand">Rayhan</h1>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <img src="assets/profile.jpg" alt="Foto Rayhan" class="avatar">
+      <div class="hero-content">
+        <h2>Ahmad Rayhan</h2>
+        <p class="headline">Pelajar / Pengembang Web pemula — suka coding, game, dan teknologi</p>
+        <p class="bio">Halo! Saya Rayhan. Saya sedang belajar teknologi jaringan dan pengembangan web. Di sini adalah biodata singkat saya.</p>
+        <a class="btn" href="#contact">Hubungi Saya</a>
+      </div>
+    </section>
+
+    <section id="about" class="card">
+      <h3>Tentang Saya</h3>
+      <p>Nama: Ahmad Rayhan<br>Kelas: XII TKJ<br>Hobi: Bermain game, belajar jaringan dan web development<br>Alamat: [Isi alamat]</p>
+    </section>
+
+    <section id="education" class="card">
+      <h3>Pendidikan</h3>
+      <ul>
+        <li>Sekolah Menengah Kejuruan — TKJ</li>
+      </ul>
+    </section>
+
+    <section id="skills" class="card">
+      <h3>Keahlian</h3>
+      <ul class="skills-list">
+        <li>HTML & CSS</li>
+        <li>Dasar JavaScript</li>
+        <li>Jaringan (Dasar)</li>
+        <li>Packet Tracer</li>
+      </ul>
+    </section>
+
+    <section id="contact" class="card">
+      <h3>Kontak</h3>
+      <p>Email: <a href="mailto:rayhan@example.com">rayhan@example.com</a></p>
+      <p>Instagram / Telegram / WA: [diisi]</p>
+    </section>
+
+    <footer class="site-footer">
+      <p>© Rayhan — Dibuat dengan ❤️</p>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+=== styles.css ===
+:root{
+  --bg:#f7f7fb;
+  --card:#ffffff;
+  --text:#1b1b1f;
+  --muted:#6b6b75;
+}
+[data-theme="dark"]{
+  --bg:#0f1721;
+  --card:#0b1220;
+  --text:#e6eef8;
+  --muted:#98a3b3;
+}
+*{box-sizing:border-box}
+body{font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; margin:0; background:var(--bg); color:var(--text); line-height:1.5}
+.container{max-width:900px;margin:0 auto;padding:24px}
+.site-header{background:transparent;padding:12px 0}
+.brand{margin:0;display:inline-block}
+.theme-toggle{float:right;background:none;border:0;font-size:18px;cursor:pointer}
+.hero{display:flex;gap:20px;align-items:center;padding:18px 0}
+.avatar{width:140px;height:140px;border-radius:14px;object-fit:cover;border:4px solid rgba(0,0,0,0.06)}
+.hero-content h2{margin:0 0 6px}
+.headline{margin:6px 0;color:var(--muted)}
+.card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 6px 20px rgba(8,15,30,0.06);margin:18px 0}
+.skills-list{display:flex;flex-wrap:wrap;gap:8px;list-style:none;padding:0;margin:8px 0}
+.skills-list li{background:rgba(0,0,0,0.06);padding:6px 10px;border-radius:8px}
+.btn{display:inline-block;margin-top:12px;padding:10px 14px;border-radius:10px;text-decoration:none;background:#1d4ed8;color:white}
+.site-footer{text-align:center;color:var(--muted);margin:30px 0}
+@media (max-width:700px){.hero{flex-direction:column;text-align:center}.theme-toggle{float:none}}
+
+=== script.js ===
+// Tombol toggle tema
+const themeToggle = document.getElementById('themeToggle');
+const root = document.documentElement;
+
+function loadTheme(){
+  const saved = localStorage.getItem('theme');
+  if(saved === 'dark') document.documentElement.setAttribute('data-theme','dark');
+}
+
+themeToggle?.addEventListener('click', ()=>{
+  const current = document.documentElement.getAttribute('data-theme');
+  const next = current === 'dark' ? '' : 'dark';
+  if(next) document.documentElement.setAttribute('data-theme', next);
+  else document.documentElement.removeAttribute('data-theme');
+  localStorage.setItem('theme', next || 'light');
+});
+
+loadTheme();
+
+=== assets/README.txt ===
+Letakkan foto profil di `assets/profile.jpg`. Ganti file ini dengan foto Rayhan (format JPG/PNG).
